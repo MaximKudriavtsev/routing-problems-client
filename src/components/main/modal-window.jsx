@@ -2,6 +2,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 // import { ModalMap } from './modal-map';
+import { ModalMapNew } from './modal-map-new';
 
 export default class ModalWindow extends React.PureComponent {
   render() {
@@ -19,14 +20,15 @@ export default class ModalWindow extends React.PureComponent {
         isOpen={showModal}
       >
         <ModalHeader>
-          Добавить Запись
+          Добавить запись
         </ModalHeader>
         <ModalBody>
+          <ModalMapNew />
           {/* <ModalMap
             setData={setFrom}
             from
-          />
-          <ModalMap
+          /> */}
+          {/* <ModalMap
             setData={setTo}
           /> */}
           <div className="input-group mb-3">
