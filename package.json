@@ -1,16 +1,26 @@
 {
   "name": "routing-problems-client",
   "version": "0.1.0",
+  "author": "Maxim Kudryavtsev",
   "private": true,
-  "dependencies": {
-    "react": "^16.3.1",
-    "react-dom": "^16.3.1",
-    "react-scripts": "1.1.4"
-  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
+  },
+  "dependencies": {
+    "react": "^16.3.1",
+    "react-dom": "^16.3.1",
+    "react-scripts": "1.1.4",
+    "react-redux": "^5.0.5",
+    "redux": "^3.7.1",
+    "redux-thunk": "^2.2.0",
+    "react-google-maps": "^9.4.5",
+    "lodash": "^4.17.5",
+    "reactstrap": "^5.0.0",
+    "@devexpress/dx-react-core": "^1.1.1",
+    "@devexpress/dx-react-grid": "^1.1.1",
+    "@devexpress/dx-react-grid-bootstrap4": "^1.1.1"
   }
 }
