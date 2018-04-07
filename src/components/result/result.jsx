@@ -1,11 +1,10 @@
 import * as React from 'react';
 import { Card, CardHeader, CardBody } from 'reactstrap';
 import { connect } from 'react-redux';
-import * as actionCreators from "../main/actions";
 import { MapDirection } from './map-direction';
 
 
-class Result extends React.PureComponent {
+export default class Result extends React.PureComponent {
   render() {
     const { resultPoints } = this.props.main;
     return (
@@ -20,10 +19,3 @@ class Result extends React.PureComponent {
     );
   }
 }
-
-export default connect(
-  state => ({
-      main: state.main
-  }),
-  (actionCreators)
-)(Result);

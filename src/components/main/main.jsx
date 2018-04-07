@@ -1,43 +1,28 @@
 import * as React from 'react';
-import { Card } from 'reactstrap';
-import { connect } from 'react-redux';
-import * as actionCreators from "./actions";
-import Title from './header';
+import { Card, CardHeader } from 'reactstrap';
 import Grid from './grid';
 import ControlPanel from './control-panel';
-// import ModalWindow from './modal-window';
-// import { DivWrapper } from "./main.style";
+import ModalWindow from './modal-window';
 
-class Main extends React.PureComponent {
+export default class Main extends React.PureComponent {
   render() {
-    const { loading, rows } = this.props.main;
+    const { actions, clientProps, rows, toggleModal } = this.props;
 
     return (
       <React.Fragment>
-        {/* {
-          loading && <DivWrapper>
-            <div className="sk-folding-cube">
-              <div className="sk-cube1 sk-cube"></div>
-              <div className="sk-cube2 sk-cube"></div>
-              <div className="sk-cube4 sk-cube"></div>
-              <div className="sk-cube3 sk-cube"></div>
-            </div>
-          </DivWrapper>
-        } */}
         <Card>
-          <Title />
-            <Grid rows={rows} />
-          <ControlPanel />
-          {/* <ModalWindow /> */}
+          <CardHeader>
+            <h5>Текущие заказы</h5>
+          </CardHeader>
+          
+          <Grid rows={rows} />
+          <ControlPanel toggleModal={toggleModal} />
+          <ModalWindow
+            actions={actions}
+            clientProps={clientProps}
+          />
         </Card>
       </React.Fragment>
     );
   }
 }
-
-export default connect(
-  state => ({
-      main: state.main,
-  }),
-  (actionCreators)
-)(Main);

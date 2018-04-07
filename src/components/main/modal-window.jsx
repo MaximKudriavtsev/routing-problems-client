@@ -1,13 +1,12 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-import * as actionCreators from "./actions";
-import { ModalMap } from './modal-map';
+// import { ModalMap } from './modal-map';
 
-class ModalWindow extends React.PureComponent {
+export default class ModalWindow extends React.PureComponent {
   render() {
-    const { toggleModal, addRow, setVolume, setFrom, setTo } = this.props;
-    const { showModal, volume, from, to } = this.props.main;
+    const { toggleModal, addRow, setVolume, setFrom, setTo } = this.props.actions;
+    const { showModal, volume, from, to } = this.props.clientProps;
     
     const onButtonAddClick = (_from, _to, _volume) => {
       addRow({ from: _from, to: _to, volume: _volume });
@@ -23,13 +22,13 @@ class ModalWindow extends React.PureComponent {
           Добавить Запись
         </ModalHeader>
         <ModalBody>
-          <ModalMap
+          {/* <ModalMap
             setData={setFrom}
             from
           />
           <ModalMap
             setData={setTo}
-          />
+          /> */}
           <div className="input-group mb-3">
             <div className="input-group-prepend">
               <span className="input-group-text" id="basic-addon1">м3</span>
@@ -39,20 +38,19 @@ class ModalWindow extends React.PureComponent {
         </ModalBody>
         <ModalFooter>
           <Button
+            className="btn-success"
             onClick={() => onButtonAddClick(from, to, volume)}
           >
             Добавить
           </Button>
-          <Button className="btn-danger" onClick={toggleModal}>Отменить</Button>
+          <Button
+            className="btn-danger"
+            onClick={toggleModal}
+          >
+            Отменить
+          </Button>
         </ModalFooter>
       </Modal>
     );
   }
 }
-
-export default connect(
-  state => ({
-      main: state.main
-  }),
-  (actionCreators)
-)(ModalWindow);

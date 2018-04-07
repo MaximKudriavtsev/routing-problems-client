@@ -1,18 +1,35 @@
 import * as React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-class App extends React.PureComponent {
+import * as clientActions from '../actions/index';
+
+import Header from '../components/header/header';
+import Main from '../components/main/main';
+// import Result from '../components/result/result';
+import Footer from '../components/footer/footer';
+
+class App extends React.Component {
   render() {
+    const { actions, clientProps } = this.props;
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
+      <React.Fragment>
+        <Header />
+        <Main
+          actions={actions}
+          clientProps={clientProps}
+          rows={clientProps.rows}
+          toggleModal={actions.toggleModal}
+        />
+        {/* <Result /> */}
+        <Footer />
+      </ React.Fragment>
     );
   }
 }
 
-export default App;
+export default connect(
+  state => ({ clientProps: state }),
+  dispatch => ({ actions: bindActionCreators(clientActions, dispatch) }),
+)(App);
