@@ -39,22 +39,7 @@ export const toggleModal = () => {
   });
 };
 
-export const addRow = (row) => (dispatch) => {
-  const fetchTask = fetch('https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=Washington,DC&destinations=New+York+City,NY&key=AIzaSyBOJw2cBN7I7GvH1lD17TO9-C5eOQ_Nb4s', {
-    method: 'GET',
-    headers: { 'Content-Type': 'application/json; charset=UTF-8' },
-  }).then(val => {
-    console.log(val);
-    return val.json();
-  }).then(value => {
-    console.log(value);
-        // dispatch({ type: 'RESPONSE', payload: value });
-  }).catch(err => {
-    console.log(err);
-    dispatch({ type: 'ERROR' });
-  });
-  dispatch({ type: 'LOADING' });
-
+export const addRow = (row) => {
   return ({
     payload: row,
     type: 'ADD_ROW'

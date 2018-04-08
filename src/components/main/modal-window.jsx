@@ -10,7 +10,7 @@ export default class ModalWindow extends React.PureComponent {
     
     const onButtonAddClick = (_from, _to, _volume) => {
       debugger;
-      // addRow({ from: _from, to: _to, volume: _volume });
+      addRow({ from: _from, to: _to, volume: _volume });
       toggleModal();
     };
 

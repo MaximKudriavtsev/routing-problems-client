@@ -3,7 +3,7 @@ import _ from 'lodash';
 import { withScriptjs, withGoogleMap, GoogleMap, Marker } from "react-google-maps";
 import { SearchBox } from 'react-google-maps/lib/components/places/SearchBox';
 
-class MapComponent extends React.Component {
+class MapComponent extends React.PureComponent {
   componentWillMount() {
     const refs = {}
 
@@ -100,7 +100,7 @@ class MapComponent extends React.Component {
         {markers && markers.map((marker, index) => {
           const lng = marker.position.lng().toString();
           const lat = marker.position.lat().toString();
-          // props.setData(`${lat},${lng}`);
+          props.setData(`${lat},${lng}`);
           console.log(`${lat},${lng}`);
 
           return <Marker key={index} position={marker.position} />
@@ -112,7 +112,7 @@ class MapComponent extends React.Component {
 }
 const MapWithGoogle = withGoogleMap(MapComponent);
 
-export const MapWithSearch = (props) => (
+export const MapWithSearch = props => (
   <MapWithGoogle 
     containerElement={<div style={{ height: `400px` }} />}
     mapElement={<div style={{ height: `100%` }} />}

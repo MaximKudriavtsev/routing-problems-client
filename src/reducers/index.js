@@ -1,17 +1,17 @@
 const initialState = {
-  lat: 0,
-  lng: 0,
-  from: '',
-  to: '',
-  showModal: false,
-  rows: [
-    { id: 0, from: "55.7558,37.6173", to: "54.2048,37.6185", volume: "300" },
-    { id: 1, from: "57.6261,39.8845", to: "55.8304,49.0661", volume: "100" },
-  ],
-  volume: 0,
-  loading: false,
-  resultPoints: [],
-  
+	lat: 0,
+	lng: 0,
+	from: '',
+	to: '',
+	showModal: false,
+	rows: [
+		{ id: 0, from: "55.7558,37.6173", to: "54.2048,37.6185", volume: "300" },
+		{ id: 1, from: "57.6261,39.8845", to: "55.8304,49.0661", volume: "100" },
+	],
+	volume: 0,
+	loading: false,
+	resultPoints: [],
+
 }
 
 // locations = [
@@ -23,97 +23,73 @@ const initialState = {
 //   ];
 
 export default (state = initialState, action) => {
-  switch (action.type) {
-      case 'LOADING': {
-          return {
-              ...state,
-              loading: true
-          };
-      }
-      case 'RESPONSE': {
-          return {
-              ...state,
-              loading: false,
-              resultPoints: action.payload
-          };
-      }
-      case 'ERROR': {
-          return {
-              ...state,
-              loading: false
-          };
-      }
-      case 'SET_LAT':  {
-          if (state.lat !== action.payload) {
-              return {
-                  ...state,
-                  lat: action.payload
-              };
-          }
-          return state;
-      }
+	switch (action.type) {
+		case 'LOADING': {
+			return {
+				...state,
+				loading: true
+			};
+		}
+		case 'RESPONSE': {
+			return {
+				...state,
+				loading: false,
+				resultPoints: action.payload
+			};
+		}
+		case 'ERROR': {
+			return {
+				...state,
+				loading: false
+			};
+		}
+		case 'SET_FROM': {
+			if (state.from !== action.payload) {
+				return {
+					...state,
+					from: action.payload
+				};
+			}
+			return state;
+		}
+		case 'SET_TO': {
+			if (state.to !== action.payload) {
+				return {
+					...state,
+					to: action.payload
+				};
+			}
+			return state;
+		}
+		case 'SET_VOLUME': {
+			if (state.volume !== action.payload) {
+				return {
+					...state,
+					volume: action.payload
+				};
+			}
+			return state;
+		}
+		case 'ADD_ROW': {
+			let { rows } = state;
+			const startingAddedId = (rows.length - 1) > 0 ? rows[rows.length - 1].id + 1 : 0;
+			const nextRows = rows.slice();
+			nextRows.push({ id: startingAddedId, ...action.payload });
 
-      case 'SET_LNG': {
-          if (state.lng !== action.payload) {
-              return {
-                  ...state,
-                  lng: action.payload
-              };
-          }
-          return state;
-      }
+			return {
+				...state,
+				rows: nextRows
+			}
+		}
+		case 'TOGGLE_MODAL': {
+			const nextShow = !state.showModal;
+			return {
+				...state,
+				showModal: nextShow
+			}
+		}
 
-      case 'SET_FROM':  {
-          if (state.lat !== action.payload) {
-              return {
-                  ...state,
-                  from: action.payload
-              };
-          }
-          return state;
-      }
-
-      case 'SET_TO': {
-          if (state.lng !== action.payload) {
-              return {
-                  ...state,
-                  to: action.payload
-              };
-          }
-          return state;
-      }
-
-      case 'SET_VOLUME': {
-          if (state.volume !== action.payload) {
-              return {
-                  ...state,
-                  volume: action.payload
-              };
-          }
-          return state;
-      }
-
-      case 'ADD_ROW': {
-      let { rows } = state;
-      const startingAddedId = (rows.length - 1) > 0 ? rows[rows.length - 1].id + 1 : 0;
-      const nextRows = rows.slice();
-      nextRows.push({ id: startingAddedId, ...action.payload });
-
-      return {
-          ...state,
-          rows: nextRows
-          }
-      }
-      
-      case 'TOGGLE_MODAL': {
-      const nextShow = !state.showModal;
-        return {
-          ...state,
-          showModal: nextShow
-        }
-      }
-          
-      default:
-          return state;
-  }
+		default:
+			return state;
+	}
 };
