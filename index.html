@@ -1,22 +1,74 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="theme-color" content="#000000">
-
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json">
-    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <title>Routing Problems</title>
-  </head>
-  <body>
-    <noscript>
-      You need to enable JavaScript to run this app.
-    </noscript>
-    <div id="root"></div>
-    <!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgHtosrjRqxMuHb-sPWIhKxw7_VgTQzTw&callback=initMap"></script> -->
-    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"></script>
-    <script type="text/javascript" src="./dist/bundle.js"></script>
-  <script type="text/javascript" src="bundle.js"></script></body>
-</html>
+Html Webpack Plugin:
+<pre>
+  Error: Child compilation failed:
+  Module build failed: Error: ENOENT: no such file or directory, open 'D:\_Dev\routing-problems-client\public\index.html':
+  Error: ENOENT: no such file or directory, open 'D:\_Dev\routing-problems-client\public\index.html'
+  
+  - compiler.js:79 childCompiler.runAsChild
+    [routing-problems-client]/[html-webpack-plugin]/lib/compiler.js:79:16
+  
+  - Compiler.js:240 compile
+    [routing-problems-client]/[webpack]/lib/Compiler.js:240:11
+  
+  - Compiler.js:485 hooks.afterCompile.callAsync.err
+    [routing-problems-client]/[webpack]/lib/Compiler.js:485:14
+  
+  
+  - Hook.js:35 AsyncSeriesHook.lazyCompileHook [as _callAsync]
+    [routing-problems-client]/[tapable]/lib/Hook.js:35:21
+  
+  - Compiler.js:482 compilation.seal.err
+    [routing-problems-client]/[webpack]/lib/Compiler.js:482:30
+  
+  
+  - Hook.js:35 AsyncSeriesHook.lazyCompileHook [as _callAsync]
+    [routing-problems-client]/[tapable]/lib/Hook.js:35:21
+  
+  - Compilation.js:972 hooks.optimizeAssets.callAsync.err
+    [routing-problems-client]/[webpack]/lib/Compilation.js:972:35
+  
+  
+  - Hook.js:35 AsyncSeriesHook.lazyCompileHook [as _callAsync]
+    [routing-problems-client]/[tapable]/lib/Hook.js:35:21
+  
+  - Compilation.js:963 hooks.optimizeChunkAssets.callAsync.err
+    [routing-problems-client]/[webpack]/lib/Compilation.js:963:32
+  
+  
+  - Hook.js:35 AsyncSeriesHook.lazyCompileHook [as _callAsync]
+    [routing-problems-client]/[tapable]/lib/Hook.js:35:21
+  
+  - Compilation.js:958 hooks.additionalAssets.callAsync.err
+    [routing-problems-client]/[webpack]/lib/Compilation.js:958:36
+  
+  
+  - Hook.js:35 AsyncSeriesHook.lazyCompileHook [as _callAsync]
+    [routing-problems-client]/[tapable]/lib/Hook.js:35:21
+  
+  - Compilation.js:954 hooks.optimizeTree.callAsync.err
+    [routing-problems-client]/[webpack]/lib/Compilation.js:954:32
+  
+  
+  - Hook.js:35 AsyncSeriesHook.lazyCompileHook [as _callAsync]
+    [routing-problems-client]/[tapable]/lib/Hook.js:35:21
+  
+  - Compilation.js:896 Compilation.seal
+    [routing-problems-client]/[webpack]/lib/Compilation.js:896:27
+  
+  - Compiler.js:479 hooks.make.callAsync.err
+    [routing-problems-client]/[webpack]/lib/Compiler.js:479:17
+  
+  
+  - Compilation.js:764 _addModuleChain
+    [routing-problems-client]/[webpack]/lib/Compilation.js:764:12
+  
+  - Compilation.js:703 processModuleDependencies.err
+    [routing-problems-client]/[webpack]/lib/Compilation.js:703:9
+  
+  - next_tick.js:131 _combinedTickCallback
+    internal/process/next_tick.js:131:7
+  
+  - next_tick.js:180 process._tickCallback
+    internal/process/next_tick.js:180:9
+  
+</pre><script type="text/javascript" src="bundle.js"></script>
