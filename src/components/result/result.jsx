@@ -6,7 +6,7 @@ import { MapDirection } from './map-direction';
 
 export default class Result extends React.PureComponent {
   render() {
-    const { resultPoints } = this.props.main;
+    const { resultPoints } = this.props;
     return (
           <Card style={{ marginTop: '20px' }}>
           <CardHeader>

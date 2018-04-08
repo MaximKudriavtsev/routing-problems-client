@@ -17,7 +17,7 @@ export default class ControlPanel extends React.PureComponent {
           <Button
             color="primary"
             style={{ marginLeft: '10px' }}
-            onClick={() => alert('Start data processing')}
+            onClick={() => console.log('Start data processing')}
           >
             Вычислить маршрут
           </Button>

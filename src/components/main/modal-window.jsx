@@ -1,8 +1,7 @@
 import * as React from 'react';
 import { connect } from 'react-redux';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
-// import { ModalMap } from './modal-map';
-// import { ModalMapNew } from './modal-map-new';
+import { MapWithSearch } from './map-with-search';
 
 export default class ModalWindow extends React.PureComponent {
   render() {
@@ -10,7 +9,8 @@ export default class ModalWindow extends React.PureComponent {
     const { showModal, volume, from, to } = this.props.clientProps;
     
     const onButtonAddClick = (_from, _to, _volume) => {
-      addRow({ from: _from, to: _to, volume: _volume });
+      debugger;
+      // addRow({ from: _from, to: _to, volume: _volume });
       toggleModal();
     };
 
@@ -23,13 +23,13 @@ export default class ModalWindow extends React.PureComponent {
           Добавить запись
         </ModalHeader>
         <ModalBody>
-          {/* <ModalMap
+          <MapWithSearch
             setData={setFrom}
             from
-          /> */}
-          {/* <ModalMap
+          />
+          <MapWithSearch
             setData={setTo}
-          /> */}
+          />
           <div className="input-group mb-3">
             <div className="input-group-prepend">
               <span className="input-group-text" id="basic-addon1">м3</span>

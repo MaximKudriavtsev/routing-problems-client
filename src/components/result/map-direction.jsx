@@ -44,12 +44,13 @@ export const MapDirection = compose(
   })
 )(props => {
   const { directions } = props;
+  
   return (
     <GoogleMap
       defaultZoom={7}
       defaultCenter={new google.maps.LatLng(54.2048, 37.6185)}
     >
-      <DirectionsRenderer directions={directions} />
+      {directions && <DirectionsRenderer directions={directions} />}
     </GoogleMap>
     );
   }
