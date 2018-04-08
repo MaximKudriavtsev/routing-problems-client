@@ -4,6 +4,8 @@ import Grid from './grid';
 import ControlPanel from './control-panel';
 import ModalWindow from './modal-window';
 import { ModalMapNew } from './modal-map-new';
+import { SimpleMap } from './simple-map';
+// import { ModalMap } from './modal-map';
 
 export default class Main extends React.PureComponent {
   render() {
@@ -23,10 +25,15 @@ export default class Main extends React.PureComponent {
             clientProps={clientProps}
           />
 
+          {/* <ModalMap /> */}
 
+          <SimpleMap
+            containerElement={<div style={{ height: `400px` }} />}
+            mapElement={<div style={{ height: `100%` }} />}
+          />
           <ModalMapNew
-            googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-            loadingElement={<div style={{ height: `100%` }} />}
+            // googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
+            // loadingElement={<div style={{ height: `100%` }} />}
             containerElement={<div style={{ height: `400px` }} />}
             mapElement={<div style={{ height: `100%` }} />}
 

@@ -3,6 +3,20 @@ import _ from 'lodash';
 import { GoogleMap, withGoogleMap, withScriptjs, Marker } from "react-google-maps";
 import { compose, withProps, lifecycle } from "recompose";
 import { SearchBox } from 'react-google-maps/lib/components/places/SearchBox';
+import GoogleMapsLoader from 'google-maps'; // only for common js environments 
+ 
+GoogleMapsLoader.load(function(google) {
+    new google.maps.Map(el, options);
+    debugger
+});
+
+const KEY = 'AIzaSyCtddnh4gbhDSLJrEz7oAd0iFRPEBB8AL0';
+
+var googleMapsClient = require('@google/maps').createClient({
+  key: KEY,
+});
+
+debugger;
 
 export const ModalMap = compose(
   withProps({
