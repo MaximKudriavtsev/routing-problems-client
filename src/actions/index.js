@@ -1,8 +1,8 @@
 import {
-  createDirections,
-  responseJsonDirections,
+  getDirectionsPromise,
+  getDirectionsResponse,
   validateDirectionMatrix
-} from './../../core/create-directions';
+} from './../core/create-directions';
 
 const KEY = 'AIzaSyAGaF4cA3wqi33FzmapotsZFDErzY8wFmE';
 
@@ -54,12 +54,12 @@ export const addRow = (row, directions, customers) => (dispatch) => {
   newCustomers.push(row.from);
   newCustomers.push(row.to);
 
-  const nextDirections = createDirections(newCustomers, newDirections);
+  const nextDirections = getDirectionsPromise(newCustomers, newDirections);
 
   debugger
   nextDirections.then((values) => {
     console.log(values);
-    const jsonDirections = responseJsonDirections(values);
+    const jsonDirections = getDirectionsResponse(values);
     jsonDirections.then((matrix) => {
       const nextDirections = validateDirectionMatrix(matrix);
       console.log(nextDirections);
