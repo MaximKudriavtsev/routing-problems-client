@@ -11,6 +11,7 @@ const initialState = {
 	volume: 0,
 	resultPoints: [],
 
+	directions: [],
 	customers: ["55.7558,37.6173"], // customers[0] = initialPoint
 }
 
@@ -75,18 +76,26 @@ export default (state = initialState, action) => {
 			}
 			return state;
 		}
+		case 'RESPONSE_DIRECTIONS': {
+			debugger
+			return {
+				...state,
+				directions: action.payload.directions
+			}
+		}
 		case 'ADD_ROW': {
-			const { rows, customers } = state;
+			debugger
+			const { customers, loading } = action.payload;
+			const { rows } = state;
 			const startingAddedId = (rows.length - 1) > 0 ? rows[rows.length - 1].id + 1 : 0;
 			const nextRows = rows.slice();
-			nextRows.push({ id: startingAddedId, ...action.payload });
+			nextRows.push({ id: startingAddedId, ...action.payload.row });
 
-			customers.push(action.payload.from);
-			customers.push(action.payload.to);
 			return {
 				...state,
 				rows: nextRows,
-				customers
+				customers,
+				loading
 			}
 		}
 		case 'TOGGLE_MODAL': {

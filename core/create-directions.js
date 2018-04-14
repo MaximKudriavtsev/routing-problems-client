@@ -13,9 +13,7 @@ export const getDirectionPromise = (origin, destination) => {
 export const getDirections = (directionsPromise) => {
   const directions = [];
   for (let i = 0; i < directionsPromise.length; i += 1) {
-    directions[i] = Promise.all(directionsPromise[i])
-      .then(values => values.json())
-      .then(res => res);
+    directions[i] = Promise.all(directionsPromise[i]);
   }
 
   return directions;
@@ -37,17 +35,56 @@ export const createDirections = (customers, directions) => {
         newDirections[i][j] = 0;
         continue;
       }
-      // under the middle line
-      // if (i > j) {
-      //   newDirections[i][j] = newDirections[j][i];
-      //   continue;
-      // }
-
       // get direction from google api
       newDirections[i][j] = getDirectionPromise(customers[i], customers[j]);
     }
   }
 
-  const directionsNext = getDirections(newDirections);
-  return directionsNext;
+  const directionsPromiseArray = getDirections(newDirections);
+
+  const directionsPromise = Promise.all(directionsPromiseArray);
+
+  return directionsPromise;
+};
+
+export const responseJsonDirections = (responseDirections) => {
+  const jsonPromiseDirections = [];
+  for (let i = 0; i < responseDirections.length; i += 1) {
+    jsonPromiseDirections.push([]);
+  }
+
+  for (let i = 0; i < responseDirections.length; i += 1) {
+    for (let j = i; j < responseDirections.length; j += 1 ) {
+      if (typeof(responseDirections[i][j]) === 'number') {
+        jsonPromiseDirections[i][j] = responseDirections[i][j];
+        continue;
+      }
+
+      jsonPromiseDirections[i][j] = responseDirections[i][j].json();
+    }
+  }
+
+  const nextDirections = getDirections(jsonPromiseDirections);
+  const jsonDirections = Promise.all(nextDirections);
+
+  return jsonDirections;
+};
+
+export const validateDirectionMatrix = (directionMatrix) => {
+  const length = directionMatrix.length;
+  const nextDirectionMatrix = [];
+
+  for (let i = 0; i < length; i += 1) {
+    nextDirectionMatrix.push([]);
+    for (let j = i; j < length; j += 1 ) {
+      if (typeof(directionMatrix[i][j]) === 'number') {
+        nextDirectionMatrix[i][j] = directionMatrix[i][j];
+        continue;
+      }
+
+      nextDirectionMatrix[i][j] = directionMatrix[i][j].routes[0].legs[0].distance.value;
+    }
+  }
+
+  return nextDirectionMatrix;
 };

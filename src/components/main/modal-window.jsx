@@ -6,11 +6,10 @@ import { MapWithSearch } from './map-with-search';
 export default class ModalWindow extends React.PureComponent {
   render() {
     const { toggleModal, addRow, setVolume, setFrom, setTo } = this.props.actions;
-    const { showModal, volume, from, to } = this.props.clientProps;
+    const { showModal, volume, from, to, customers, directions } = this.props.clientProps;
     
     const onButtonAddClick = (_from, _to, _volume) => {
-      debugger;
-      addRow({ from: _from, to: _to, volume: _volume });
+      addRow({ from: _from, to: _to, volume: _volume }, directions, customers);
       toggleModal();
     };
 

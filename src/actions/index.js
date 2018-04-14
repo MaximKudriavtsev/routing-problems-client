@@ -1,4 +1,8 @@
-import { createDirections } from './../../core/create-directions';
+import {
+  createDirections,
+  responseJsonDirections,
+  validateDirectionMatrix
+} from './../../core/create-directions';
 
 const KEY = 'AIzaSyAGaF4cA3wqi33FzmapotsZFDErzY8wFmE';
 
@@ -43,27 +47,44 @@ export const toggleModal = () => {
   });
 };
 
-export const addRow = (row, directions, customers) => {
+export const addRow = (row, directions, customers) => (dispatch) => {
   const newCustomers = customers.slice();
   const newDirections = directions.slice();
 
   newCustomers.push(row.from);
   newCustomers.push(row.to);
 
-  debugger
-  const nextDirections = createDirections(customers, newDirections);
+  const nextDirections = createDirections(newCustomers, newDirections);
 
-  return({
+  debugger
+  nextDirections.then((values) => {
+    console.log(values);
+    const jsonDirections = responseJsonDirections(values);
+    jsonDirections.then((matrix) => {
+      const nextDirections = validateDirectionMatrix(matrix);
+      console.log(nextDirections);
+
+      dispatch({
+        payload: {
+          directions: nextDirections
+        },
+        type: 'RESPONSE_DIRECTIONS'
+      });
+    });
+  });
+
+  debugger
+  dispatch({
     payload: {
       customers: newCustomers,
       row,
+      loading: true,
     },
     type: 'ADD_ROW'
   });
-});
+};
 
-
-export const addRow1 = (row, directions, customers) => {
+export const addRow1 = (row) => {
   fetch(
     'https://maps.googleapis.com/maps/api/directions/json?&origin=55.7558,37.6173&destination=54.2048,37.6185&key=AIzaSyAGaF4cA3wqi33FzmapotsZFDErzY8wFmE',
     {
