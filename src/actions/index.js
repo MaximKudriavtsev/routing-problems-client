@@ -54,11 +54,9 @@ export const addRow = (row, directions, customers) => (dispatch) => {
   newCustomers.push(row.from);
   newCustomers.push(row.to);
 
-  const nextDirections = getDirectionsPromise(newCustomers, newDirections);
+  const directionsPromise = getDirectionsPromise(newCustomers, newDirections);
 
-  debugger
-  nextDirections.then((values) => {
-    console.log(values);
+  directionsPromise.then((values) => {
     const jsonDirections = getDirectionsResponse(values);
     jsonDirections.then((matrix) => {
       const nextDirections = validateDirectionMatrix(matrix);
@@ -73,7 +71,6 @@ export const addRow = (row, directions, customers) => (dispatch) => {
     });
   });
 
-  debugger
   dispatch({
     payload: {
       customers: newCustomers,

@@ -12,8 +12,8 @@ export default class Grid extends React.PureComponent {
     this.state = {
       columns: [
         { name: "id", title: "ID" },
-        { name: "from", title: "Начальный адрес" },
-        { name: "to", title: "Конечный адрес" },
+        { name: "fromAddress", title: "Начальный адрес" },
+        { name: "toAddress", title: "Конечный адрес" },
         { name: "volume", title: "Объем груза" },
       ]
     };

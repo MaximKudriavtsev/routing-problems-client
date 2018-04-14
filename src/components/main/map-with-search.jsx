@@ -27,6 +27,7 @@ class MapComponent extends React.PureComponent {
       },
       onPlacesChanged: () => {
         const places = refs.searchBox.getPlaces();
+        const address = `${places[0].formatted_address} ${places[0].name}`;
         /* eslint-disable-next-line no-undef */
         const bounds = new google.maps.LatLngBounds();
 
@@ -45,6 +46,7 @@ class MapComponent extends React.PureComponent {
         this.setState({
           center: nextCenter,
           markers: nextMarkers,
+          address
         });
         // refs.map.fitBounds(bounds);
       },
@@ -61,6 +63,7 @@ class MapComponent extends React.PureComponent {
       onBoundsChanged,
       onSearchBoxMounted,
       onPlacesChanged,
+      address
     } = this.state;
 
     return (
@@ -100,7 +103,7 @@ class MapComponent extends React.PureComponent {
         {markers && markers.map((marker, index) => {
           const lng = marker.position.lng().toString();
           const lat = marker.position.lat().toString();
-          props.setData(`${lat},${lng}`);
+          props.setData({ coordinates: `${lat},${lng}`, address });
           console.log(`${lat},${lng}`);
 
           return <Marker key={index} position={marker.position} />

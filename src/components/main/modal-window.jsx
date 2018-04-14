@@ -6,10 +6,10 @@ import { MapWithSearch } from './map-with-search';
 export default class ModalWindow extends React.PureComponent {
   render() {
     const { toggleModal, addRow, setVolume, setFrom, setTo } = this.props.actions;
-    const { showModal, volume, from, to, customers, directions } = this.props.clientProps;
+    const { showModal, volume, from, to, customers, directions, fromAddress, toAddress } = this.props.clientProps;
     
-    const onButtonAddClick = (_from, _to, _volume) => {
-      addRow({ from: _from, to: _to, volume: _volume }, directions, customers);
+    const onButtonAddClick = (_from, _fromAddress, _to, _toAddress, _volume) => {
+      addRow({ from: _from, to: _to, volume: _volume, fromAddress: _fromAddress, toAddress: _toAddress }, directions, customers);
       toggleModal();
     };
 
@@ -39,7 +39,7 @@ export default class ModalWindow extends React.PureComponent {
         <ModalFooter>
           <Button
             className="btn-success"
-            onClick={() => onButtonAddClick(from, to, volume)}
+            onClick={() => onButtonAddClick(from, fromAddress, to, toAddress, volume)}
           >
             Добавить
           </Button>

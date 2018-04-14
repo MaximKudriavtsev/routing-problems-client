@@ -14,7 +14,7 @@ class App extends React.Component {
     const { actions, clientProps } = this.props;
 
     return (
-      <React.Fragment>
+      <div className="container col-10">
         <Header />
         <Main
           actions={actions}
@@ -24,7 +24,7 @@ class App extends React.Component {
         />
         <Result resultPoints={clientProps.resultPoints} />
         <Footer />
-      </ React.Fragment>
+      </ div>
     );
   }
 }

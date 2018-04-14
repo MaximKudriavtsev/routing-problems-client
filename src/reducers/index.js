@@ -3,10 +3,12 @@ const initialState = {
 	loading: false,
 
 	from: '',
+	fromAddress: '',
 	to: '',
+	toAddress: '',
+
 	rows: [
-		{ id: 0, from: "55.7558,37.6173", to: "54.2048,37.6185", volume: "300" },
-		{ id: 1, from: "57.6261,39.8845", to: "55.8304,49.0661", volume: "100" },
+		{ id: 0, from: "54.1945832,37.6210281", fromAddress: 'Менделеевская ул., 2, Тула, Тульская обл., Россия, 300041 Тульский Кремль', to: "55.7495732,37.613411", toAddress: 'Москва, Россия, 103073 Московский Кремль', volume: "300" },
 	],
 	volume: 0,
 	resultPoints: [],
@@ -14,19 +16,6 @@ const initialState = {
 	directions: [],
 	customers: ["55.7558,37.6173"], // customers[0] = initialPoint
 }
-
-const directions = [
-
-];
-
-
-// locations = [
-//     ['Bondi Beach', -33.890542, 151.274856, 4],
-//     ['Coogee Beach', -33.923036, 151.259052, 5],
-//     ['Cronulla Beach', -34.028249, 151.157507, 3],
-//     ['Manly Beach', -33.80010128657071, 151.28747820854187, 2],
-//     ['Maroubra Beach', -33.950198, 151.259302, 1]
-//   ];
 
 export default (state = initialState, action) => {
 	switch (action.type) {
@@ -50,19 +39,21 @@ export default (state = initialState, action) => {
 			};
 		}
 		case 'SET_FROM': {
-			if (state.from !== action.payload) {
+			if (state.from !== action.payload.coordinates) {
 				return {
 					...state,
-					from: action.payload
+					from: action.payload.coordinates,
+					fromAddress: action.payload.address
 				};
 			}
 			return state;
 		}
 		case 'SET_TO': {
-			if (state.to !== action.payload) {
+			if (state.to !== action.payload.coordinates) {
 				return {
 					...state,
-					to: action.payload
+					to: action.payload.coordinates,
+					toAddress: action.payload.address
 				};
 			}
 			return state;
@@ -77,7 +68,6 @@ export default (state = initialState, action) => {
 			return state;
 		}
 		case 'RESPONSE_DIRECTIONS': {
-			debugger
 			return {
 				...state,
 				directions: action.payload.directions
