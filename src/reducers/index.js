@@ -1,18 +1,23 @@
 const initialState = {
-	lat: 0,
-	lng: 0,
+	showModal: false,
+	loading: false,
+
 	from: '',
 	to: '',
-	showModal: false,
 	rows: [
 		{ id: 0, from: "55.7558,37.6173", to: "54.2048,37.6185", volume: "300" },
 		{ id: 1, from: "57.6261,39.8845", to: "55.8304,49.0661", volume: "100" },
 	],
 	volume: 0,
-	loading: false,
 	resultPoints: [],
 
+	customers: ["55.7558,37.6173"], // customers[0] = initialPoint
 }
+
+const directions = [
+
+];
+
 
 // locations = [
 //     ['Bondi Beach', -33.890542, 151.274856, 4],
@@ -71,14 +76,17 @@ export default (state = initialState, action) => {
 			return state;
 		}
 		case 'ADD_ROW': {
-			let { rows } = state;
+			const { rows, customers } = state;
 			const startingAddedId = (rows.length - 1) > 0 ? rows[rows.length - 1].id + 1 : 0;
 			const nextRows = rows.slice();
 			nextRows.push({ id: startingAddedId, ...action.payload });
 
+			customers.push(action.payload.from);
+			customers.push(action.payload.to);
 			return {
 				...state,
-				rows: nextRows
+				rows: nextRows,
+				customers
 			}
 		}
 		case 'TOGGLE_MODAL': {
