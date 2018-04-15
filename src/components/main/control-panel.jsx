@@ -3,7 +3,7 @@ import { Button, CardFooter } from 'reactstrap';
 
 export default class ControlPanel extends React.PureComponent {
   render() {
-    const { toggleModal } = this.props;
+    const { toggleModal, directions, getMinimalChain } = this.props;
 
     return (
       <React.Fragment>
@@ -17,7 +17,10 @@ export default class ControlPanel extends React.PureComponent {
           <Button
             color="primary"
             style={{ marginLeft: '10px' }}
-            onClick={() => console.log('Start data processing')}
+            onClick={() => {
+              console.log('Start data processing');
+              getMinimalChain(directions);
+            }}
           >
             Вычислить маршрут
           </Button>

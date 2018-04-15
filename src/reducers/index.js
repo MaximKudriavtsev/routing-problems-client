@@ -74,7 +74,6 @@ export default (state = initialState, action) => {
 			}
 		}
 		case 'ADD_ROW': {
-			debugger
 			const { customers, loading } = action.payload;
 			const { rows } = state;
 			const startingAddedId = (rows.length - 1) > 0 ? rows[rows.length - 1].id + 1 : 0;
@@ -93,6 +92,12 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 				showModal: nextShow
+			}
+		}
+		case 'GET_MINIMAL_CHAIN': {
+			return {
+				...state,
+			//	resultPoints: action.payload.minimalChain
 			}
 		}
 

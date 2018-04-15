@@ -3,6 +3,7 @@ import {
   getDirectionsResponse,
   validateDirectionMatrix
 } from './../core/create-directions';
+import { getMinimalChainConditions } from './../core/create-route';
 
 const KEY = 'AIzaSyAGaF4cA3wqi33FzmapotsZFDErzY8wFmE';
 
@@ -124,4 +125,13 @@ export const postData = (text) => (dispatch) => {
     dispatch({ type: 'ERROR' });
   });
   dispatch({ type: 'LOADING' });
+};
+
+export const getMinimalChain = (directions) => {
+  const minimalChain = getMinimalChainConditions(directions);
+
+  return({
+    type: 'GET_MINIMAL_CHAIN',
+    payload: { minimalChain }
+  });
 };

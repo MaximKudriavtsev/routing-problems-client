@@ -21,6 +21,8 @@ class App extends React.Component {
           clientProps={clientProps}
           rows={clientProps.rows}
           toggleModal={actions.toggleModal}
+          getMinimalChain={actions.getMinimalChain}
+          directions={clientProps.directions}
         />
         <Result resultPoints={clientProps.resultPoints} />
         <Footer />

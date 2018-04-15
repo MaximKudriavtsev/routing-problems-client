@@ -1,4 +1,4 @@
-import { KEY, DIRECTION_URL } from './constants';
+import { KEY } from './constants';
 
 const getDirectionPromise = (origin, destination) => {
   return fetch(

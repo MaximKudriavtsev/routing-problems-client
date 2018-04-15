@@ -7,7 +7,7 @@ import { SimpleMap } from './simple-map';
 
 export default class Main extends React.PureComponent {
   render() {
-    const { actions, clientProps, rows, toggleModal } = this.props;
+    const { actions, clientProps, rows, toggleModal, getMinimalChain, directions } = this.props;
 
     return (
       <React.Fragment>
@@ -17,7 +17,11 @@ export default class Main extends React.PureComponent {
           </CardHeader>
           
           <Grid rows={rows} />
-          <ControlPanel toggleModal={toggleModal} />
+          <ControlPanel
+            directions={directions}
+            toggleModal={toggleModal}
+            getMinimalChain={getMinimalChain}
+          />
           <ModalWindow
             actions={actions}
             clientProps={clientProps}
