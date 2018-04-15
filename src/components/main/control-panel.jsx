@@ -3,7 +3,7 @@ import { Button, CardFooter } from 'reactstrap';
 
 export default class ControlPanel extends React.PureComponent {
   render() {
-    const { toggleModal, directions, getMinimalChain } = this.props;
+    const { toggleModal, directions, getMinimalChain, customers } = this.props;
 
     return (
       <React.Fragment>
@@ -19,7 +19,7 @@ export default class ControlPanel extends React.PureComponent {
             style={{ marginLeft: '10px' }}
             onClick={() => {
               console.log('Start data processing');
-              getMinimalChain(directions);
+              getMinimalChain(directions, customers);
             }}
           >
             Вычислить маршрут

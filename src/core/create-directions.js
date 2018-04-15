@@ -1,12 +1,17 @@
 import { KEY } from './constants';
 
+function sleep(ms) {
+  ms += new Date().getTime();
+  while (new Date() < ms) { }
+}
+
 const getDirectionPromise = (origin, destination) => {
   return fetch(
     `https://maps.googleapis.com/maps/api/directions/json?&origin=${origin}&destination=${destination}&key=${KEY}`, {
-    mode: 'cors',
-    method: 'GET',
-    headers: { 'Access-Control-Allow-Origin': 'https://maps.googleapis.com' },
-  });
+      mode: 'cors',
+      method: 'GET',
+      headers: { 'Access-Control-Allow-Origin': 'https://maps.googleapis.com' },
+    });
 };
 
 const getPromiseArray = (directionsPromise) => {
@@ -27,7 +32,7 @@ export const getDirectionsPromise = (customers, directions) => {
   }
 
   for (let i = 0; i < newDirections.length; i += 1) {
-    for (let j = 0; j < newDirections.length; j += 1 ) {
+    for (let j = 0; j < newDirections.length; j += 1) {
       // middle line and under the middle line
       if (i >= j) {
         newDirections[i][j] = 0;
@@ -50,8 +55,8 @@ export const getDirectionsResponse = (responseDirectionsMatrix) => {
   }
 
   for (let i = 0; i < responseDirectionsMatrix.length; i += 1) {
-    for (let j = 0; j < responseDirectionsMatrix.length; j += 1 ) {
-      if (typeof(responseDirectionsMatrix[i][j]) === 'number') {
+    for (let j = 0; j < responseDirectionsMatrix.length; j += 1) {
+      if (typeof (responseDirectionsMatrix[i][j]) === 'number') {
         jsonDirectionsMatrix[i][j] = responseDirectionsMatrix[i][j];
         continue;
       }
@@ -71,8 +76,8 @@ export const validateDirectionMatrix = (directionMatrix) => {
 
   for (let i = 0; i < length; i += 1) {
     nextDirectionMatrix.push([]);
-    for (let j = 0; j < length; j += 1 ) {
-      if (typeof(directionMatrix[i][j]) === 'number') {
+    for (let j = 0; j < length; j += 1) {
+      if (typeof (directionMatrix[i][j]) === 'number') {
         nextDirectionMatrix[i][j] = directionMatrix[i][j];
         continue;
       }

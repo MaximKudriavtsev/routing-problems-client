@@ -23,8 +23,10 @@ export const MapDirection = compose(
       const { pointPairs } = nextProps;
       const DirectionsService = new google.maps.DirectionsService();
 
-      const onlyFrom = pointPairs.map(item => ({ lat: item.from.split(',')[0] * 1, lng: item.from.split(',')[1] * 1 }));
-      const wayPoints = pointPairs.map(pair => {return {location: pair.to, stopover: true }});
+      // const onlyFrom = pointPairs.map(item => ({ lat: item.from.split(',')[0] * 1, lng: item.from.split(',')[1] * 1 }));
+      // const wayPoints = pointPairs.map(pair => {return {location: pair.to, stopover: true }});
+      const onlyFrom = pointPairs.map(item => ({ lat: item.split(',')[0] * 1, lng: item.split(',')[1] * 1 }));
+      const wayPoints = pointPairs.map(pair => ({ location: pair, stopover: true }));
       DirectionsService.route({
         origin: new google.maps.LatLng(onlyFrom[0].lat, onlyFrom[0].lng),
         destination: new google.maps.LatLng(onlyFrom[0].lat, onlyFrom[0].lng),

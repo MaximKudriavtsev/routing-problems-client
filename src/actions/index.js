@@ -3,7 +3,10 @@ import {
   getDirectionsResponse,
   validateDirectionMatrix
 } from './../core/create-directions';
-import { getMinimalChainConditions } from './../core/create-route';
+import {
+  getMinimalChainConditions,
+  getPointIndex
+} from './../core/create-route';
 
 const KEY = 'AIzaSyAGaF4cA3wqi33FzmapotsZFDErzY8wFmE';
 
@@ -127,11 +130,21 @@ export const postData = (text) => (dispatch) => {
   dispatch({ type: 'LOADING' });
 };
 
-export const getMinimalChain = (directions) => {
+export const getMinimalChain = (directions, customers) => {
   const minimalChain = getMinimalChainConditions(directions);
+  const pointPairs = [];
 
+  minimalChain.chain.forEach((point) => {
+    const customer = customers[getPointIndex(point)]
+    pointPairs.push(customer);
+  });
+
+  debugger
   return({
     type: 'GET_MINIMAL_CHAIN',
-    payload: { minimalChain }
+    payload: {
+      minimalChain,
+      pointPairs
+    }
   });
 };

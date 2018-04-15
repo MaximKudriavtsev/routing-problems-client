@@ -57,7 +57,6 @@ export const isFinishChain = (availiablePoints, chain) => {
 };
 
 export const minimalChain = (points, chain, minLength) => {
-  debugger;
   const lastChainPoint = !!chain.length && chain[chain.length - 1];
   const availiablePoints = points.filter(point => point !== lastChainPoint);
 
@@ -78,7 +77,6 @@ export const minimalChain = (points, chain, minLength) => {
 };
 
 export const getMinimalChain = (points) => {
-  debugger;
   let minimalChain = points.slice();
   minimalChain.push(0);
   let minimalLength = getChainLength(minimalChain);
@@ -167,7 +165,6 @@ export const getMinimalChainConditions = (directions, weights, volumes, maxWeigh
 
   
   const findMinimalChain = (chain, currentWeight, currentVolume, points, availablePoints) => {
-    debugger
     const currentChainLenght = getChainLength(chain, directions);
 
     if (currentChainLenght > minimalLength) {
@@ -196,7 +193,6 @@ export const getMinimalChainConditions = (directions, weights, volumes, maxWeigh
   const initialAvailablePoints = points.filter(point => point > 0);
   findMinimalChain([0], 0, 0, points, initialAvailablePoints);
 
-  debugger
   console.log(`MIN: ${minimalChain} ${minimalLength}`);
   return { chain: minimalChain, length: minimalLength };
 };

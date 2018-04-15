@@ -95,9 +95,11 @@ export default (state = initialState, action) => {
 			}
 		}
 		case 'GET_MINIMAL_CHAIN': {
+			debugger
 			return {
 				...state,
-			//	resultPoints: action.payload.minimalChain
+				minimalChain: action.payload.minimalChain,
+				resultPoints: action.payload.pointPairs,
 			}
 		}
 
