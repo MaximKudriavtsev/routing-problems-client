@@ -22,6 +22,8 @@ export default class Main extends React.PureComponent {
             toggleModal={toggleModal}
             getMinimalChain={getMinimalChain}
             customers={clientProps.customers}
+            volumes={clientProps.volumes}
+            weights={clientProps.weights}
           />
           <ModalWindow
             actions={actions}

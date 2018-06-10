@@ -24,7 +24,11 @@ class App extends React.Component {
           getMinimalChain={actions.getMinimalChain}
           directions={clientProps.directions}
         />
-        <Result resultPoints={clientProps.resultPoints} />
+        <Result
+          resultPoints={clientProps.resultPoints}
+          minimalChain={clientProps.minimalChain}
+          rows={clientProps.rows}
+        />
         <Footer />
       </ div>
     );

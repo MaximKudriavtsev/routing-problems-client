@@ -9,11 +9,20 @@ import {
 } from './../core/create-route';
 
 const KEY = 'AIzaSyAGaF4cA3wqi33FzmapotsZFDErzY8wFmE';
+const MAX_WEIGHT = 1500;
+const MAX_VOLUME = 9;
 
 export const setVolume = (volume) => {
   return ({
     payload: volume,
     type: 'SET_VOLUME'
+  });
+};
+
+export const setWeight = (weight) => {
+  return ({
+    payload: weight,
+    type: 'SET_WEIGHT'
   });
 };
 
@@ -51,12 +60,16 @@ export const toggleModal = () => {
   });
 };
 
-export const addRow = (row, directions, customers) => (dispatch) => {
+export const addRow = (row, directions, customers, volumes, weights) => (dispatch) => {
   const newCustomers = customers.slice();
   const newDirections = directions.slice();
+  const newVolumes = volumes.slice();
+  const newWeights = weights.slice();
 
   newCustomers.push(row.from);
   newCustomers.push(row.to);
+  newVolumes.push(row.volume);
+  newWeights.push(row.weight);
 
   const directionsPromise = getDirectionsPromise(newCustomers, newDirections);
 
@@ -78,6 +91,8 @@ export const addRow = (row, directions, customers) => (dispatch) => {
   dispatch({
     payload: {
       customers: newCustomers,
+      weights: newWeights,
+      volumes: newVolumes,
       row,
       loading: true,
     },
@@ -96,12 +111,10 @@ export const addRow1 = (row) => {
   )
     .then((response) => {
       console.log(response);
-      debugger;
       return response.json();
     })
     .then((result) => {
       console.log(result);
-      debugger
       return console.log(result);
     })
     .catch(alert);
@@ -130,8 +143,8 @@ export const postData = (text) => (dispatch) => {
   dispatch({ type: 'LOADING' });
 };
 
-export const getMinimalChain = (directions, customers) => {
-  const minimalChain = getMinimalChainConditions(directions);
+export const getMinimalChain = (directions, customers, weights, volumes) => {
+  const minimalChain = getMinimalChainConditions(directions, weights, volumes, MAX_WEIGHT, MAX_VOLUME);
   const pointPairs = [];
 
   minimalChain.chain.forEach((point) => {
@@ -139,7 +152,6 @@ export const getMinimalChain = (directions, customers) => {
     pointPairs.push(customer);
   });
 
-  debugger
   return({
     type: 'GET_MINIMAL_CHAIN',
     payload: {

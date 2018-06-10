@@ -7,14 +7,23 @@ const initialState = {
 	to: '',
 	toAddress: '',
 
-	rows: [
-		{ id: 0, from: "54.1945832,37.6210281", fromAddress: 'Менделеевская ул., 2, Тула, Тульская обл., Россия, 300041 Тульский Кремль', to: "55.7495732,37.613411", toAddress: 'Москва, Россия, 103073 Московский Кремль', volume: "300" },
-	],
+	rows: [{
+		id: 0,
+		from: "54.1945832,37.6210281",
+		fromAddress: 'Менделеевская ул., 2, Тула, Тульская обл., Россия, 300041 Тульский Кремль',
+		to: "55.7495732,37.613411",
+		toAddress: 'Гараж',
+		volume: "0",
+		weight: "0",
+	}],
 	volume: 0,
+	weight: 0,
 	resultPoints: [],
 
 	directions: [],
-	customers: ["55.7558,37.6173"], // customers[0] = initialPoint
+	customers: ["54.194716, 37.619821"], // customers[0] = initialPoint
+	volumes: [0],
+	weights: [0],
 }
 
 export default (state = initialState, action) => {
@@ -67,6 +76,15 @@ export default (state = initialState, action) => {
 			}
 			return state;
 		}
+		case 'SET_WEIGHT': {
+			if (state.weight !== action.payload) {
+				return {
+					...state,
+					weight: action.payload
+				};
+			}
+			return state;
+		}
 		case 'RESPONSE_DIRECTIONS': {
 			return {
 				...state,
@@ -74,16 +92,20 @@ export default (state = initialState, action) => {
 			}
 		}
 		case 'ADD_ROW': {
-			const { customers, loading } = action.payload;
+			const { customers, loading, volumes, weights } = action.payload;
 			const { rows } = state;
-			const startingAddedId = (rows.length - 1) > 0 ? rows[rows.length - 1].id + 1 : 0;
+			const startingAddedId = (rows.length - 1) >= 0 ? rows[rows.length - 1].id + 1 : 0;
 			const nextRows = rows.slice();
 			nextRows.push({ id: startingAddedId, ...action.payload.row });
 
+			console.log(volumes);
+			console.log(weights);
 			return {
 				...state,
 				rows: nextRows,
 				customers,
+				weights,
+				volumes,
 				loading
 			}
 		}
@@ -95,7 +117,6 @@ export default (state = initialState, action) => {
 			}
 		}
 		case 'GET_MINIMAL_CHAIN': {
-			debugger
 			return {
 				...state,
 				minimalChain: action.payload.minimalChain,
